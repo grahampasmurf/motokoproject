@@ -32,7 +32,7 @@ actor {
   public type HttpResponse = Http.Response;
   public query func http_request(request : HttpRequest) : async HttpResponse {
     return ({
-      body = Text.encodeUtf8("This is a DAO controlled webpage");
+      body = Text.encodeUtf8("This is a DAO controlled webpage, okay?");
       headers = [("Content-Type", "text/html; charset=UTF-8")];
       status_code = 200 : Nat16;
       streaming_strategy = null;
