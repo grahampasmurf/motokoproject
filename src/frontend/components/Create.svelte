@@ -44,7 +44,7 @@
       <p style="color: red">{error.message}</p>
     {/await}
   {:else}
-    <p class="example-disabled">Login to access this page</p>
+    <p class="example-disabled">Login to access this page, okay?</p>
   {/if}
 </div>
 
