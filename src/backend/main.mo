@@ -1,9 +1,29 @@
 import Principal "mo:base/Principal";
 import Text "mo:base/Text";
 import Http "http";
+import TrieMap "mo:base/TrieMap";
+import Buffer "mo:base/Buffer";
+import HashMap "mo:base/HashMap";
+import Hash "mo:base/Hash";
+import Int "mo:base/Int";
 actor {
 
-  type Proposal = {}; // To define
+  type Status = {
+    #Open;
+    #Accepted;
+    #Rejected;
+  };
+
+  type Proposal = {
+    id : Int;
+    status : Status;
+    manifest : Text;
+    votes : Int;
+    voters : [Principal];
+  }; // To define
+
+var NextProposalId : Int = 0;
+let proposals = TrieMap.TrieMap<Int, Proposal>(Int.equal, Int.hash);
 
   public shared ({ caller }) func submitProposal(text : Text) : async {
     #Ok : Proposal;
@@ -20,7 +40,7 @@ actor {
   };
 
   public query func getProposal(id : Int) : async ?Proposal {
-    return null;
+    return proposals.get(id);
   };
 
   public query func getAllProposals() : async [(Int, Proposal)] {
